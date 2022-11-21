@@ -1,7 +1,7 @@
 diff -dur requests-2.18.2.orig/requests/certs.py requests-2.18.2/requests/certs.py
 --- requests-2.18.2.orig/requests/certs.py	2017-05-31 11:19:09.000000000 +0200
 +++ requests-2.18.2/requests/certs.py	2017-08-01 14:30:44.000000000 +0200
-@@ -12,7 +12,14 @@
+@@ -11,7 +11,14 @@ If you are packaging Requests, e.g., for
  environment, you can change the definition of where() to return a separately
  packaged CA bundle.
  """
@@ -10,10 +10,11 @@ diff -dur requests-2.18.2.orig/requests/certs.py requests-2.18.2/requests/certs.
 +import os
 +
 +if os.path.exists("/etc/certs/ca-certificates.crt"):
-+     def where():
++    def where():
 +        return "/etc/certs/ca-certificates.crt"
 +else:
 +    from certifi import where
  
- if __name__ == '__main__':
+ if __name__ == "__main__":
      print(where())
+
