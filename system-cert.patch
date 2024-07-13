@@ -1,6 +1,6 @@
 diff -dur requests-2.18.2.orig/requests/certs.py requests-2.18.2/requests/certs.py
---- requests-2.18.2.orig/requests/certs.py	2017-05-31 11:19:09.000000000 +0200
-+++ requests-2.18.2/requests/certs.py	2017-08-01 14:30:44.000000000 +0200
+--- requests-2.18.2.orig/src/requests/certs.py	2017-05-31 11:19:09.000000000 +0200
++++ requests-2.18.2/src/requests/certs.py	2017-08-01 14:30:44.000000000 +0200
 @@ -11,7 +11,14 @@ If you are packaging Requests, e.g., for
  environment, you can change the definition of where() to return a separately
  packaged CA bundle.

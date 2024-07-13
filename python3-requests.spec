@@ -8,20 +8,20 @@
 Summary:	HTTP library for Python
 Summary(pl.UTF-8):	Biblioteka HTTP dla Pythona
 Name:		python3-%{module}
-Version:	2.31.0
+Version:	2.32.3
 Release:	1
 License:	Apache v2.0
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/requests/
 Source0:	https://files.pythonhosted.org/packages/source/r/requests/%{module}-%{version}.tar.gz
-# Source0-md5:	941e175c276cd7d39d098092c56679a4
+# Source0-md5:	fa3ee5ac3f1b3f4368bd74ab530d3f0f
 Patch0:		system-cert.patch
 Patch1:	        python-requests-reqs.patch
 Patch2:		python-requests-disable-xdist.patch
 URL:		https://docs.python-requests.org/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.713
-BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-PySocks >= 1.5.8
@@ -38,7 +38,7 @@ BuildRequires:	python3-pytest-xdist
 BuildRequires:	python3-urllib3 >= %{urllib3_ver}
 BuildRequires:	python3-urllib3 < 1.27
 %endif
-Requires:	python3-modules >= 1:3.6
+Requires:	python3-modules >= 1:3.8
 Requires:	python3-charset_normalizer >= 2
 # for https
 Requires:	python3-cryptography >= 1.3.4
