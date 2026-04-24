@@ -1,12 +1,11 @@
---- requests-2.25.1/setup.py.orig	2020-12-16 18:43:25.000000000 +0100
-+++ requests-2.25.1/setup.py	2021-01-24 18:05:52.042717398 +0100
-@@ -65,7 +65,7 @@ requires = [
-     "certifi>=2017.4.17",
- ]
- test_requirements = [
+--- requests-2.33.1/pyproject.toml.orig	2025-04-24 00:00:00.000000000 +0000
++++ requests-2.33.1/pyproject.toml	2025-04-24 00:00:00.000000000 +0000
+@@ -56,7 +56,7 @@
+ [dependency-groups]
+ test = [
+     "requests[socks]",
 -    "pytest-httpbin==2.1.0",
 +    "pytest-httpbin>=2.1.0",
+     "httpbin~=0.10.0",
      "pytest-cov",
      "pytest-mock",
-     "pytest-xdist",
-

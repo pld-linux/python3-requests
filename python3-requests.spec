@@ -8,13 +8,13 @@
 Summary:	HTTP library for Python
 Summary(pl.UTF-8):	Biblioteka HTTP dla Pythona
 Name:		python3-%{module}
-Version:	2.32.5
+Version:	2.33.1
 Release:	1
 License:	Apache v2.0
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/requests/
 Source0:	https://files.pythonhosted.org/packages/source/r/requests/%{module}-%{version}.tar.gz
-# Source0-md5:	cb3d3c58f07cf23f12c345f2c96a6f12
+# Source0-md5:	ebc3b42b51c6245524345d170e5d4c50
 Patch0:		system-cert.patch
 Patch1:	        python-requests-reqs.patch
 Patch2:		python-requests-disable-xdist.patch
