@@ -1,10 +1,8 @@
 #
 # Conditional build:
-%bcond_with	tests	# pytest tests (one test fails with pytest-httpbin 1.0.0)
+%bcond_without	tests	# pytest tests
 
-%define		urllib3_ver	1.21.1
 %define		module		requests
-%define		egg_name	requests
 Summary:	HTTP library for Python
 Summary(pl.UTF-8):	Biblioteka HTTP dla Pythona
 Name:		python3-%{module}
@@ -19,32 +17,32 @@ Patch0:		system-cert.patch
 Patch1:	        python-requests-reqs.patch
 Patch2:		python-requests-disable-xdist.patch
 URL:		https://docs.python-requests.org/
-BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.713
-BuildRequires:	python3-modules >= 1:3.8
-BuildRequires:	python3-setuptools
+BuildRequires:	python3-modules >= 1:3.10
+BuildRequires:	python3-setuptools >= 1:61.0
 %if %{with tests}
 BuildRequires:	python3-PySocks >= 1.5.8
-BuildRequires:	python3-certifi >= 2017.4.17
+BuildRequires:	python3-certifi >= 2023.6.7
 BuildRequires:	python3-charset_normalizer >= 2
-BuildRequires:	python3-charset_normalizer < 2.1
+BuildRequires:	python3-charset_normalizer < 4
+BuildRequires:	python3-httpbin >= 0.10.0
+BuildRequires:	python3-httpbin < 0.11
 BuildRequires:	python3-idna >= 2.5
 BuildRequires:	python3-idna < 4
 BuildRequires:	python3-pytest >= 3
 BuildRequires:	python3-pytest-cov
-BuildRequires:	python3-pytest-httpbin >= 0.0.7
+BuildRequires:	python3-pytest-httpbin >= 2.1.0
 BuildRequires:	python3-pytest-mock >= 2.0.0
 BuildRequires:	python3-pytest-xdist
-BuildRequires:	python3-urllib3 >= %{urllib3_ver}
-BuildRequires:	python3-urllib3 < 1.27
+BuildRequires:	python3-trustme
+BuildRequires:	python3-urllib3 >= 1.26
+BuildRequires:	python3-urllib3 < 3
 %endif
-Requires:	python3-modules >= 1:3.8
-Requires:	python3-charset_normalizer >= 2
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.713
+Requires:	python3-modules >= 1:3.10
 # for https
 Requires:	python3-cryptography >= 1.3.4
-Requires:	python3-idna >= 2.5
 Requires:	python3-pyOpenSSL >= 0.14
-Requires:	python3-urllib3 >= 1.22-2
 Suggests:	ca-certificates
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -82,9 +80,11 @@ Ten pakiet zawiera moduł dla Pythona 3.x.
 %py3_build
 
 %if %{with tests}
+# timeout tests fail with network disabled
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTEST_PLUGINS="pytest_httpbin.plugin,pytest_mock" \
-%{__python3} -m pytest tests
+PYTHONPATH=$(pwd)/src \
+%{__python3} -m pytest tests -k 'not test_connect_timeout and not test_total_timeout_connect'
 %endif
 
 %install
@@ -99,4 +99,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc HISTORY.md README.md
 %{py3_sitescriptdir}/%{module}
-%{py3_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
+%{py3_sitescriptdir}/%{module}-%{version}-py*.egg-info
